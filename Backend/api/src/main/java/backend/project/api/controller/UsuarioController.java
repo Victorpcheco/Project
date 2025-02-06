@@ -4,6 +4,7 @@ import backend.project.api.dto.LoginRequest;
 import backend.project.api.dto.LoginResponse;
 import backend.project.api.model.Usuario;
 import backend.project.api.service.UsuarioService;
+import backend.project.api.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
 
+    @Autowired
+    private JwtUtil jwtUtil;
     @Autowired
     private UsuarioService usuarioService;
 
@@ -28,7 +31,7 @@ public class UsuarioController {
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         boolean autenticado = usuarioService.autenticarUsuario(loginRequest.getEmail(), loginRequest.getSenha());
         if (autenticado) {
-            String token = "token_gerado_aqui"; // Substitua por um token JWT real no futuro
+            String token = jwtUtil.generateToken(loginRequest.getEmail());
             return ResponseEntity.ok(new LoginResponse(token));
         } else {
             return ResponseEntity.status(401).build();
