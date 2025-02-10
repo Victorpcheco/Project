@@ -1,77 +1,93 @@
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
+  /* Centraliza o conteúdo vertical e horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Define a altura do contêiner como 100% da altura da viewport */
+  height: 100vh;
+
+  /* Define a cor de fundo do contêiner */
+  background-color: #f0f2f5;
+}
+
+.login-form {
+  /* Estilo do formulário de login */
+  background: #fff; /* Fundo branco */
+  padding: 2rem; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 100%; /* Largura total */
+  max-width: 400px; /* Largura máxima */
+  text-align: center; /* Centraliza o texto */
+
+  /* Estilo do título do formulário */
+  h2 {
+    margin-bottom: 1.5rem; /* Espaçamento abaixo do título */
+    color: #333; /* Cor do texto */
   }
-  
-  .login-form {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  
-    h2 {
-      margin-bottom: 1.5rem;
-      color: #333;
+
+  /* Estilo dos grupos de campos do formulário */
+  .form-group {
+    margin-bottom: 1rem; /* Espaçamento entre os grupos */
+    text-align: left; /* Alinha o texto à esquerda */
+
+    /* Estilo das labels */
+    label {
+      display: block; /* Faz a label ocupar a linha inteira */
+      margin-bottom: 0.5rem; /* Espaçamento abaixo da label */
+      color: #555; /* Cor do texto */
     }
-  
-    .form-group {
-      margin-bottom: 1rem;
-      text-align: left;
-  
-      label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: #555;
-      }
-  
-      input {
-        width: 100%;
-        padding: 0.75rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-size: 1rem;
-        color: #333;
-  
-        &:focus {
-          border-color: #007bff;
-          outline: none;
-        }
+
+    /* Estilo dos campos de entrada */
+    input {
+      width: 100%; /* Largura total */
+      padding: 0.75rem; /* Espaçamento interno */
+      border: 1px solid #ddd; /* Borda sutil */
+      border-radius: 4px; /* Bordas arredondadas */
+      font-size: 1rem; /* Tamanho da fonte */
+      color: #333; /* Cor do texto */
+
+      /* Estilo quando o campo está em foco */
+      &:focus {
+        border-color: #007bff; /* Muda a cor da borda */
+        outline: none; /* Remove o contorno padrão */
       }
     }
-  
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-  
+  }
+
+  /* Estilo do botão de login */
+  button {
+    width: 100%; /* Largura total */
+    padding: 0.75rem; /* Espaçamento interno */
+    background-color: #007bff; /* Cor de fundo azul */
+    color: #fff; /* Cor do texto branco */
+    border: none; /* Remove a borda */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-size: 1rem; /* Tamanho da fonte */
+    cursor: pointer; /* Muda o cursor para pointer */
+    transition: background-color 0.3s ease; /* Transição suave de cor */
+
+    /* Efeito ao passar o mouse sobre o botão */
+    &:hover {
+      background-color: #0056b3; /* Cor de fundo mais escura */
+    }
+  }
+
+  /* Estilo do parágrafo abaixo do formulário */
+  p {
+    margin-top: 1rem; /* Espaçamento acima do parágrafo */
+    color: #555; /* Cor do texto */
+
+    /* Estilo do link dentro do parágrafo */
+    a {
+      color: #007bff; /* Cor azul do link */
+      text-decoration: none; /* Remove o sublinhado */
+
+      /* Efeito ao passar o mouse sobre o link */
       &:hover {
-        background-color: #0056b3;
-      }
-    }
-  
-    p {
-      margin-top: 1rem;
-      color: #555;
-  
-      a {
-        color: #007bff;
-        text-decoration: none;
-  
-        &:hover {
-          text-decoration: underline;
-        }
+        text-decoration: underline; /* Adiciona sublinhado */
       }
     }
   }
+}

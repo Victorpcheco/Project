@@ -1,17 +1,30 @@
 <div class="login-container">
+  <!-- Contêiner principal para o formulário de login -->
   <div class="login-form">
+    <!-- Título do formulário -->
     <h2>Login</h2>
+
+    <!-- Formulário que aciona a função `onSubmit()` quando enviado -->
     <form (ngSubmit)="onSubmit()">
+      <!-- Grupo de campo para o e-mail -->
       <div class="form-group">
         <label for="email">Email:</label>
+        <!-- Campo de entrada para o e-mail, com vinculação de dados bidirecional [(ngModel)] -->
         <input type="email" id="email" [(ngModel)]="credentials.email" name="email" required>
       </div>
+
+      <!-- Grupo de campo para a senha -->
       <div class="form-group">
         <label for="password">Password:</label>
+        <!-- Campo de entrada para a senha, com vinculação de dados bidirecional [(ngModel)] -->
         <input type="password" id="password" [(ngModel)]="credentials.senha" name="password" required>
       </div>
+
+      <!-- Botão para enviar o formulário -->
       <button type="submit">Login</button>
     </form>
+
+    <!-- Link para a página de registro, caso o usuário não tenha uma conta -->
     <p>Don't have an account? <a routerLink="/register">Register</a></p>
   </div>
 </div>

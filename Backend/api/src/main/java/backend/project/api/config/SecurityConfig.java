@@ -12,8 +12,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
@@ -21,45 +19,35 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    // Configuração da cadeia de filtros de segurança
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Desabilita a proteção CSRF (Cross-Site Request Forgery)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/usuarios/registrar", "/api/usuarios/login").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/api/usuarios/registrar", "/api/usuarios/login").permitAll() // Permite acesso público a essas rotas
+                        .anyRequest().authenticated() // Todas as outras rotas exigem autenticação
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class); // Adiciona o filtro JWT antes do filtro de autenticação padrão
 
-        return http.build();
+        return http.build(); // Constrói e retorna a cadeia de filtros de segurança
     }
 
+    // Configuração do codificador de senhas
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); // Usa BCrypt para codificar senhas
     }
 
-    /*@Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/usuarios/**")
-                        .allowedOrigins("http://localhost:4200")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE");
-            }
-        };
-    }*/
-
-    // Configuração de CORS
+    // Configuração de CORS (Cross-Origin Resource Sharing)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200/")); // Permitir Angular
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200/")); // Permite requisições do Angular (frontend)
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Permite métodos HTTP específicos
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type")); // Permite cabeçalhos específicos
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration); // Aplica a configuração de CORS a todas as rotas
         return source;
     }
 }
